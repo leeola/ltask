@@ -1,0 +1,20 @@
+{
+  "name": "ltask",
+  "version": "0.0.0",
+  "description": "A simple task queuing library, and pet project of the owner. Look away.",
+  "author": "leeolayvar <leeolayvar@gmail.com> http://leeolayvar.com",
+  "repositories": [{
+    "type": "git",
+    "url": "git://github.com/leeolayvar/ltask.git"
+  }],
+  "scripts": {
+    "test": "test/index.js"
+  },
+  "devDependencies": {
+    "vows": "0.6.x",
+    "should": "0.5.x"
+  },
+  "dependencies": {},
+  "engine": "node",
+  "main": "./lib/ltask.js"
+}
