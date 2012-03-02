@@ -14,7 +14,6 @@
     "vows": "0.6.x",
     "should": "0.5.x"
   },
-  "dependencies": {},
   "engine": "node",
   "main": "./lib/ltask.js"
 }
