@@ -2,21 +2,14 @@
 //
 // test/index.js
 //
-// Our main test file. Run this with node, and watch all the vows do stuff.
+// Our main mocha target. Point mocha at this dir, and watch stuff happen.
 //
 // @copyright 2012 by Lee Olayvar
 //
 /*jshint asi: true*/
 
-var tests = [
-  require('./ltask')
-]
-
-if (require.main == module) {
-  for (var i = 0; i < tests.length; i++) {
-    var suites = tests[i]
-    Object.keys(suites).forEach(function (suite_key) {
-      suites[suite_key].run()
-    })
-  }
-}
+// Require all of the tests we want to run.
+// Currently this seems to be the only way i can get mocha
+// to recognize tests within the /test dir. I'm likely doing
+// something wrong, but this works fine for now.
+require('./ltask')
