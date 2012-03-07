@@ -52,8 +52,28 @@ describe('LTask', function () {
     })
   })
   
+  describe('#par', function () {
+    
+    describe('starting a par\'d task', function () {
+      beforeEach(function () {
+        var starting_ltask = new LTask()
+        ltask = new LTask()
+        ltask.par(starting_ltask)
+        starting_ltask.start()
+      })
+      
+      it('should show started', function () {
+        ltask.started().should.equal(true)
+      })
+      
+      it('should show completed', function () {
+        ltask.completed().should.equal(true)
+      })
+    })
+  })
+  
   describe('#seq', function () {
-    var seq = undefined
+    var seq
     
     describe('give seq a function', function () {
       beforeEach(function () {
@@ -97,7 +117,7 @@ describe('LTask', function () {
     describe('req an unfinishing task', function () {
       beforeEach(function () {
         ltask = new LTask()
-        ltask.req(new LTask(function (next) {}))
+        ltask.req(new LTask(function () {}))
         ltask.start()
       })
       
