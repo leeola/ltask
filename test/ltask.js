@@ -112,13 +112,13 @@ describe('LTask', function () {
       })
       
       it('link should show started and completed', function () {
-        par_task.started().should.equal(true)
-        par_task.completed().should.equal(true)
+        link_task.started().should.equal(true)
+        link_task.completed().should.equal(true)
       })
       
       it('seq should show started and completed', function () {
-        par_task.started().should.equal(true)
-        par_task.started().should.equal(true)
+        seq_task.started().should.equal(true)
+        seq_task.started().should.equal(true)
       })
     })
     
@@ -148,15 +148,15 @@ describe('LTask', function () {
       })
       
       it('link should show started and completed', function () {
-        par_task.started().should.equal(true)
-        par_task.completed().should.equal(true)
+        link_task.started().should.equal(true)
+        link_task.completed().should.equal(true)
       })
       
       // This is the key. Our linked task should have completed, but
       // it should *not* call our seq task.
       it('seq should show not started and not completed', function () {
-        par_task.started().should.equal(false)
-        par_task.started().should.equal(false)
+        seq_task.started().should.equal(false)
+        seq_task.started().should.equal(false)
       })
     })
   })
