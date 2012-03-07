@@ -87,6 +87,76 @@ describe('LTask', function () {
         ltask.completed().should.equal(true)
       })
     })
+    
+    describe('link a task, start the root', function () {
+      var par_task
+        , link_task
+        , seq_task
+      
+      beforeEach(function () {
+        par_task = new LTask()
+        link_task = new LTask()
+        seq_task = new LTask()
+        
+        // Call par, make sure link is on.
+        par_task.par(link_task, true)
+        link_task.seq(seq_task)
+        
+        new LTask(par_task).start()
+      })
+      
+      it('par should show started and completed', function () {
+        par_task.started().should.equal(true)
+        par_task.completed().should.equal(true)
+      })
+      
+      it('link should show started and completed', function () {
+        par_task.started().should.equal(true)
+        par_task.completed().should.equal(true)
+      })
+      
+      it('seq should show started and completed', function () {
+        par_task.started().should.equal(true)
+        par_task.started().should.equal(true)
+      })
+    })
+    
+    describe('link to a task that never finishes, start the root', function () {
+      var par_task
+        , link_task
+        , seq_task
+      
+      beforeEach(function () {
+        // The par task never finishes, so seq (which is linked to
+        // .. link) should never be started.
+        par_task = new LTask(function () {})
+        link_task = new LTask()
+        seq_task = new LTask()
+        
+        // Call par, make sure link is on.
+        par_task.par(link_task, true)
+        link_task.seq(seq_task)
+        
+        new LTask(par_task).start()
+      })
+      
+      it('par should show started, but not completed', function () {
+        par_task.started().should.equal(true)
+        par_task.completed().should.equal(false)
+      })
+      
+      it('link should show started and completed', function () {
+        par_task.started().should.equal(true)
+        par_task.completed().should.equal(true)
+      })
+      
+      // This is the key. Our linked task should have completed, but
+      // it should *not* call our seq task.
+      it('seq should show not started and not completed', function () {
+        par_task.started().should.equal(false)
+        par_task.started().should.equal(false)
+      })
+    })
   })
   
   describe('#req', function () {
