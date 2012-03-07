@@ -102,7 +102,8 @@ describe('LTask', function () {
         par_task.par(link_task, true)
         link_task.seq(seq_task)
         
-        new LTask(par_task).start()
+        var root = new LTask(par_task)
+        root.start()
       })
       
       it('par should show started and completed', function () {
@@ -137,7 +138,8 @@ describe('LTask', function () {
         par_task.par(link_task, true)
         link_task.seq(seq_task)
         
-        new LTask(par_task).start()
+        var root = new LTask(par_task)
+        root.start()
       })
       
       it('par should show started, but not completed', function () {
