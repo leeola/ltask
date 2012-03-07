@@ -54,7 +54,24 @@ describe('LTask', function () {
   
   describe('#par', function () {
     
-    describe('starting a par\'d task', function () {
+    describe('par a task, start the root', function () {
+      beforeEach(function () {
+        var starting_ltask = new LTask()
+        ltask = new LTask()
+        starting_ltask.par(ltask)
+        starting_ltask.start()
+      })
+      
+      it('should show started', function () {
+        ltask.started().should.equal(true)
+      })
+      
+      it('should show completed', function () {
+        ltask.completed().should.equal(true)
+      })
+    })
+    
+    describe('par a task, start the child', function () {
       beforeEach(function () {
         var starting_ltask = new LTask()
         ltask = new LTask()
