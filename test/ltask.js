@@ -113,7 +113,10 @@ describe('LTask', function () {
     describe('req a finishing task', function () {
       beforeEach(function () {
         ltask = new LTask()
-        ltask.req(new LTask(function (next) { next() }))
+        var finishing_task = new LTask(function (next) { next() })
+        ltask.req(finishing_task)
+        
+        finishing_task.start()
         ltask.start()
       })
       
