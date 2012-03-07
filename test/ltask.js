@@ -89,6 +89,44 @@ describe('LTask', function () {
     })
   })
   
+  describe('#req', function () {
+    
+    describe('req an unfinishing task', function () {
+      beforeEach(function () {
+        ltask = new LTask()
+        ltask.req(new LTask(function () {}))
+        ltask.start()
+      })
+      
+      it('should not show started', function () {
+        ltask.started().should.equal(false)
+      })
+      
+      it('should not show completed', function () {
+        ltask.completed().should.equal(false)
+      })
+    })
+    
+    describe('req a finishing task', function () {
+      beforeEach(function () {
+        ltask = new LTask()
+        var finishing_task = new LTask(function (next) { next() })
+        ltask.req(finishing_task)
+        
+        finishing_task.start()
+        ltask.start()
+      })
+      
+      it('should show started', function () {
+        ltask.started().should.equal(true)
+      })
+      
+      it('should show completed', function () {
+        ltask.completed().should.equal(true)
+      })
+    })
+  })
+  
   describe('#seq', function () {
     var seq
     
@@ -125,44 +163,6 @@ describe('LTask', function () {
       
       it('should show completed', function () {
         seq._task_completed.should.equal(true)
-      })
-    })
-  })
-  
-  describe('#req', function () {
-    
-    describe('req an unfinishing task', function () {
-      beforeEach(function () {
-        ltask = new LTask()
-        ltask.req(new LTask(function () {}))
-        ltask.start()
-      })
-      
-      it('should not show started', function () {
-        ltask.started().should.equal(false)
-      })
-      
-      it('should not show completed', function () {
-        ltask.completed().should.equal(false)
-      })
-    })
-    
-    describe('req a finishing task', function () {
-      beforeEach(function () {
-        ltask = new LTask()
-        var finishing_task = new LTask(function (next) { next() })
-        ltask.req(finishing_task)
-        
-        finishing_task.start()
-        ltask.start()
-      })
-      
-      it('should show started', function () {
-        ltask.started().should.equal(true)
-      })
-      
-      it('should show completed', function () {
-        ltask.completed().should.equal(true)
       })
     })
   })
