@@ -25,12 +25,12 @@ describe('LTask', function () {
         ltask = new LTask()
       })
       
-      it('should be complete before it\'s started', function () {
+      it('should not be completed before it\'s started', function () {
         ltask._task_started.should.equal(false)
         ltask._task_completed.should.equal(false)
       })
       
-      it('should be complete after it\'s started', function () {
+      it('should be completed after it\'s started', function () {
         // Start the ltask
         ltask.start()
         // Note that we did not give it any asnyc functions, so this
@@ -88,6 +88,41 @@ describe('LTask', function () {
       
       it('should show completed', function () {
         seq._task_completed.should.equal(true)
+      })
+    })
+  })
+  
+  describe('#req', function () {
+    
+    describe('req an unfinishing task', function () {
+      beforeEach(function () {
+        ltask = new LTask()
+        ltask.req(new LTask(function (next) {}))
+        ltask.start()
+      })
+      
+      it('should not show started', function () {
+        ltask.started().should.equal(false)
+      })
+      
+      it('should not show completed', function () {
+        ltask.completed().should.equal(false)
+      })
+    })
+    
+    describe('req a finishing task', function () {
+      beforeEach(function () {
+        ltask = new LTask()
+        ltask.req(new LTask(function (next) { next() }))
+        ltask.start()
+      })
+      
+      it('should show started', function () {
+        ltask.started().should.equal(true)
+      })
+      
+      it('should show completed', function () {
+        ltask.completed().should.equal(true)
       })
     })
   })
