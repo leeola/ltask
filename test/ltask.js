@@ -6,7 +6,7 @@
 //
 /*jshint asi: true*/
 var should = require('should')
-var LTask = require('../lib/ltask')
+var LTask = require('../lib/ltask').LTask
 
 // These are here so my IDE will shut the hell up.
 var before = global.before
